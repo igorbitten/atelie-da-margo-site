@@ -1,0 +1,47 @@
+
+.form-encomenda {
+    max-width: 600px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-encomenda label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.form-encomenda input,
+.form-encomenda select,
+.form-encomenda textarea {
+    padding: 12px;
+    border: 1px solid #e2cfc9;
+    border-radius: 5px;
+    font: inherit;
+    font-weight: normal;
+    background-color: white;
+}
+
+.form-encomenda input:focus,
+.form-encomenda select:focus,
+.form-encomenda textarea:focus {
+    outline: 2px solid #b66a75;
+}
+
+.form-encomenda .botao {
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+footer > p {
+    padding: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #a99595;
+}
