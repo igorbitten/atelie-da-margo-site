@@ -18,7 +18,7 @@
     <header>
     <div class="logo">
 
-<img src="img/atelie_da_margo-removebg-preview.png" alt="Logo Ateliê da Margo">
+<img src="img/Ateliê_da_Margo_em_Crochê-removebg-preview.png" alt="Logo Ateliê da Margo">
 
     </div>
 
@@ -27,12 +27,12 @@
             <li><a href="index.html">Início</a></li>
                 <li><a href="produtos.html">Produtos</a></li>
                 <li><a href="encomendas.html">Encomendas</a></li>
-                <li><a href="#">Sobre nós</a></li>
-                <li><a href="#">Contato</a></li>
+                <li><a href="sobre.html">Sobre nós</a></li>
+                <li><a href="contato.html">Contato</a></li>
         </ul>    
     </nav>
 
-    <div class="carrinho">🛒</div>
+    <a href="carrinho.html" class="carrinho">🛒 <span id="contador-carrinho">0</span></a>
 
     </header>
 
@@ -76,6 +76,12 @@
                 casa ou faça uma encomenda personalizada.
             </p>
 
+<div class="compra" data-produto="Jogo de Banheiro">
+    <select class="escolha-tamanho"></select>
+    <input type="number" class="quantidade" value="1" min="1">
+    <button type="button" class="botao btn-adicionar">ADICIONAR AO CARRINHO</button>
+</div>
+
             <a href="encomendas.html" class="botao">
                 FAZER ENCOMENDA
             </a>
@@ -106,6 +112,12 @@
                 para deixar os ambientes mais bonitos
                 e aconchegantes.
             </p>
+            
+<div class="compra" data-produto="Tapetes">
+    <select class="escolha-tamanho"></select>
+    <input type="number" class="quantidade" value="1" min="1">
+    <button type="button" class="botao btn-adicionar">ADICIONAR AO CARRINHO</button>
+</div>
 
             <a href="encomendas.html" target="_blank" class="botao">
                 FAZER ENCOMENDA
@@ -137,6 +149,12 @@
                 mais bonita em momentos especiais.
             </p>
 
+<div class="compra" data-produto="Sousplats">
+    <select class="escolha-tamanho"></select>
+    <input type="number" class="quantidade" value="1" min="1">
+    <button type="button" class="botao btn-adicionar">ADICIONAR AO CARRINHO</button>
+</div>
+
             <a href="encomendas.html" class="botao">
                 FAZER ENCOMENDA
             </a>
@@ -166,6 +184,12 @@
                 Centros de mesa feitos em crochê para
                 decorar sua casa com delicadeza.
             </p>
+
+<div class="compra" data-produto="Centro de Mesa">
+    <select class="escolha-tamanho"></select>
+    <input type="number" class="quantidade" value="1" min="1">
+    <button type="button" class="botao btn-adicionar">ADICIONAR AO CARRINHO</button>
+</div>
 
             <a href="encomendas.html" class="botao">
                 FAZER ENCOMENDA
@@ -198,6 +222,12 @@
                 complementar a decoração da sua mesa.
             </p>
 
+<div class="compra" data-produto="Caminho de Mesa">
+    <select class="escolha-tamanho"></select>
+    <input type="number" class="quantidade" value="1" min="1">
+    <button type="button" class="botao btn-adicionar">ADICIONAR AO CARRINHO</button>
+</div>
+
             <a href="encomendas.html" class="botao">
                 FAZER ENCOMENDA
             </a>
@@ -221,7 +251,7 @@
         </p>
 
     </footer>
-
+<script src="js/carrinho.js"></script>
 </body>
 
 </html>
