@@ -80,6 +80,114 @@ function adicionarAoCarrinho(produto, tamanho, medida, preco, quantidade) {
     atualizarContador();
 }
 
+function alterarQuantidade(indice, variacao) {
+    const carrinho = lerCarrinho();
+    const item = carrinho[indice];
+
+    if (!item) {
+        return;
+    }
+
+    item.quantidade = Math.max(1, item.quantidade + variacao);
+    salvarCarrinho(carrinho);
+    renderizarCarrinho();
+    atualizarContador();
+}
+
+function removerDoCarrinho(indice) {
+    const carrinho = lerCarrinho();
+    carrinho.splice(indice, 1);
+    salvarCarrinho(carrinho);
+    renderizarCarrinho();
+    atualizarContador();
+}
+
+function criarElemento(tag, classe, texto) {
+    const elemento = document.createElement(tag);
+    if (classe) {
+        elemento.className = classe;
+    }
+    if (texto !== undefined) {
+        elemento.textContent = texto;
+    }
+    return elemento;
+}
+
+function renderizarCarrinho() {
+    const lista = document.querySelector("#lista-produtos");
+    if (!lista) {
+        return;
+    }
+
+    const carrinho = lerCarrinho();
+    const estadoVazio = document.querySelector("#carrinho-vazio");
+    const subtotalElemento = document.querySelector("#subtotal");
+    const totalElemento = document.querySelector("#total");
+    const botaoFinalizar = document.querySelector("#finalizar-pedido");
+    const subtotal = carrinho.reduce(function (soma, item) {
+        return soma + item.preco * item.quantidade;
+    }, 0);
+
+    estadoVazio.hidden = carrinho.length > 0;
+    botaoFinalizar.disabled = carrinho.length === 0;
+    subtotalElemento.textContent = formatarPreco(subtotal);
+    totalElemento.textContent = formatarPreco(subtotal);
+    lista.replaceChildren();
+
+    const ilustracoes = {
+        "Jogo de Banheiro": "🛁",
+        "Tapetes": "🧶",
+        "Sousplats": "🍽️",
+        "Centro de Mesa": "🌸",
+        "Caminho de Mesa": "🪡"
+    };
+
+    carrinho.forEach(function (item, indice) {
+        const linha = criarElemento("article", "item-carrinho");
+        const ilustracao = criarElemento("div", "ilustracao-produto", ilustracoes[item.produto] || "🧶");
+        ilustracao.setAttribute("aria-hidden", "true");
+
+        const informacoes = criarElemento("div", "info-produto");
+        informacoes.append(
+            criarElemento("h2", "", item.produto),
+            criarElemento("p", "detalhe-produto", item.tamanho + " · " + item.medida),
+            criarElemento("p", "preco-produto", formatarPreco(item.preco) + " cada")
+        );
+
+        const acoes = criarElemento("div", "acoes-produto");
+        const quantidade = criarElemento("div", "controle-quantidade");
+        const diminuir = criarElemento("button", "ajuste-quantidade", "−");
+        diminuir.type = "button";
+        diminuir.disabled = item.quantidade <= 1;
+        diminuir.setAttribute("aria-label", "Diminuir quantidade de " + item.produto);
+        diminuir.addEventListener("click", function () {
+            alterarQuantidade(indice, -1);
+        });
+
+        const valorQuantidade = criarElemento("span", "valor-quantidade", String(item.quantidade));
+        const aumentar = criarElemento("button", "ajuste-quantidade", "+");
+        aumentar.type = "button";
+        aumentar.setAttribute("aria-label", "Aumentar quantidade de " + item.produto);
+        aumentar.addEventListener("click", function () {
+            alterarQuantidade(indice, 1);
+        });
+
+        quantidade.append(diminuir, valorQuantidade, aumentar);
+
+        const remover = criarElemento("button", "remover-produto", "Remover");
+        remover.type = "button";
+        remover.addEventListener("click", function () {
+            removerDoCarrinho(indice);
+        });
+
+        acoes.append(quantidade, remover);
+
+        const totalItem = criarElemento("strong", "total-item", formatarPreco(item.preco * item.quantidade));
+        linha.append(ilustracao, informacoes, acoes, totalItem);
+        lista.append(linha);
+    });
+}
+
 document.querySelectorAll(".compra").forEach(function (bloco) {
     const produto = bloco.dataset.produto;
     const campoTamanho = bloco.querySelector(".escolha-tamanho");
@@ -111,3 +219,11 @@ document.querySelectorAll(".compra").forEach(function (bloco) {
 });
 
 atualizarContador();
+renderizarCarrinho();
+
+window.addEventListener("storage", function (evento) {
+    if (evento.key === "carrinho") {
+        atualizarContador();
+        renderizarCarrinho();
+    }
+});

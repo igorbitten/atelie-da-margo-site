@@ -21,13 +21,17 @@
             <ul>
                 <li><a href="index.html">Início</a></li>
                 <li><a href="produtos.html">Produtos</a></li>
-                <li><a href="#">Sobre nós</a></li>
+                <li><a href="sobre-nos.html">Sobre nós</a></li>
                 <li><a href="carrinho.html">Carrinho</a></li>
             </ul>
         </nav>
 
+        <a href="carrinho.html" class="icone-carrinho" aria-label="Abrir carrinho">
+            🛒 <span id="contador-carrinho">0</span>
+        </a>
+
     </header>
-    <main class="carrinho">
+    <main class="pagina-carrinho">
 
         <div class="titulo-carrinho">
             <p class="subtitulo">SEU PEDIDO</p>
@@ -71,9 +75,11 @@
                 </div>
 
                 <div class="linha-resumo total">
-                    <span>Total</span>
+                    <span>Total dos produtos</span>
                     <span id="total">R$ 0,00</span>
                 </div>
+
+                <p class="aviso-frete">O valor do frete será combinado após a escolha da entrega.</p>
 
                 <button id="finalizar-pedido" class="botao botao-finalizar">
                     FINALIZAR PEDIDO
